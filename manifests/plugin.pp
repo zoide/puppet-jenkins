@@ -1,5 +1,9 @@
 #
-define jenkins::plugin ($version = 0) {
+define jenkins::plugin (
+  $version = 0,
+  $user    = $jenkins::params::user,
+  $group   = $jenkins::params::group,
+  $service = $jenkins::params::service) {
   $plugin = "${name}.hpi"
   $plugin_dir = '/var/lib/jenkins/plugins'
   $plugin_parent_dir = '/var/lib/jenkins'
@@ -14,19 +18,19 @@ define jenkins::plugin ($version = 0) {
   if (!defined(File[$plugin_dir])) {
     file { [$plugin_parent_dir, $plugin_dir]:
       ensure  => directory,
-      owner   => $jenkins::params::user,
-      group   => $jenkins::params::group,
-      require => [Group[$jenkins::params::group], User[$jenkins::params::user]];
+      owner   => $user,
+      group   => $group,
+     # require => [Group[$group], User[$user]];
     }
   }
 
-  if (!defined(Group[$jenkins::params::group])) {
-    group { $jenkins::params::group: ensure => present; }
-  }
-
-  if (!defined(User[$jenkins::params::user])) {
-    user { $jenkins::params::user: ensure => present; }
-  }
+#  if (!defined(Group[$group])) {
+#    group { $group: ensure => present; }
+#  }
+#
+#  if (!defined(User[$user])) {
+#    user { $user: ensure => present; }
+#  }
 
   exec { "download-${name}":
     command => "wget --no-check-certificate ${base_url}${plugin}",
@@ -38,8 +42,8 @@ define jenkins::plugin ($version = 0) {
 
   file { "${plugin_dir}/${plugin}":
     require => Exec["download-${name}"],
-    owner   => $jenkins::params::user,
+    owner   => $user,
     mode    => '0644',
-    notify  => Service[$jenkins::params::service]
+    notify  => Service[$service]
   }
 }
