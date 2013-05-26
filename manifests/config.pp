@@ -16,4 +16,3 @@ class jenkins::config (
   Class['Jenkins::Package'] -> Class['Jenkins::Config']
   create_resources('jenkins::sysconfig', $config_hash)
 }
-
