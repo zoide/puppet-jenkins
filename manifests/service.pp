@@ -1,9 +1,14 @@
 class jenkins::service {
-  service { 'jenkins':
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
+  include 'jenkins::params'
+
+  if !defined(Service[$jenkins::params::service]) {
+    service { $jenkins::params::service:
+      ensure     => running,
+      enable     => true,
+      hasstatus  => true,
+      hasrestart => true,
+    }
   }
+
 }
 
