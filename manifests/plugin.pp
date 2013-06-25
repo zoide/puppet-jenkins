@@ -4,7 +4,7 @@ define jenkins::plugin (
   $user    = $jenkins::params::user,
   $group   = $jenkins::params::group,
   $service = $jenkins::params::service) {
-  $plugin = "${name}.hpi"
+  $plugin = "${name}.jpi"
   $plugin_dir = '/var/lib/jenkins/plugins'
   $plugin_parent_dir = '/var/lib/jenkins'
   include 'jenkins::params'
