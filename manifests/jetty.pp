@@ -12,7 +12,7 @@ class jenkins::jetty (
 
   # http://mirrors.jenkins-ci.org/war/latest/jenkins.war
   # download and install
-  if $ensure == 'present' {
-    file { '/usr/share/jetty/.jenkins': ensure => '/var/lib/jenkins', }
-  }
+#  if $ensure == 'present' {
+#    file { '/usr/share/jetty/.jenkins': ensure => '/var/lib/jenkins', }
+#  }
 }
