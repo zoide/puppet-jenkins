@@ -20,7 +20,7 @@ DESC="Jenkins-Slave"
 NAME=<%= client_jar %>
 PIDFILE=/var/run/jenkins-slave.pid
 DAEMON=<%= slave_home %>/$NAME
-DAEMON_ARGS="-Ddaemon.pidfile=${PIDFILE} -jar ${DAEMON} -mode exclusive -name <%= hostname -%> -fsroot <%= slave_home -%> -executors <%= executors -%> <%= masterurl_flag %>"
+DAEMON_ARGS="-Djava.awt.headless=true -Ddaemon.pidfile=${PIDFILE} -jar ${DAEMON} -mode <%= execmode -%> -name <%= hostname -%> -fsroot <%= slave_home -%> -executors <%= executors -%> <%= masterurl_flag %>"
 SCRIPTNAME=/etc/init.d/jenkins-slave
 USER=<%= slave_user %>
 CMD="/usr/bin/java"
