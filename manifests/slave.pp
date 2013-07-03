@@ -15,7 +15,8 @@ class jenkins::slave (
   $manage_slave_user = 1,
   $slave_user        = 'jenkins-slave',
   $slave_uid         = undef,
-  $slave_home        = '/home/jenkins-slave') {
+  $slave_home        = '/home/jenkins-slave',
+  $execmode          = 'exclusive') {
   $client_jar = "swarm-client-${version}-jar-with-dependencies.jar"
   $client_url = "http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/${version}/"
 
