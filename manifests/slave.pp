@@ -23,7 +23,7 @@ class jenkins::slave (
   case $::osfamily {
     'RedHat' : { $java_package = 'java-1.6.0-openjdk' }
     'Linux'  : { $java_package = 'java-1.6.0-openjdk' }
-    'Debian' : { $java_package = 'openjdk-6-jdk' }
+    'Debian' : { $java_package = 'openjdk-7-jdk' }
 
     default  : { fail("Unsupported OS family: ${::osfamily}") }
   }
